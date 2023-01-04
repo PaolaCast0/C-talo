@@ -1,18 +1,34 @@
-<!DOCTYPE html>
+<?php
+    include "php/citar.php";
+
+    if (isset($_POST['enviar'])) {
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $year = $_POST['year'];
+        $titulo = $_POST['titulo'];
+        $editorial= $_POST['editorial'];
+    }
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <title>Cítalo</title>
 </head>
-<body>
+<body> 
+
+    <div class="hero-head">
+        
     <section>
     <nav class="navbar is-link" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
+            <a href="index.html">
             <img src="./iconos/Citalo-logo.png" width="112" height="28">
-          </a>
+            </a>
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -71,68 +87,86 @@
       </nav><br>
     </section>
 
-    <section class="section">
-    <div class="box is-small">
-        <div class="columns">
-            <div class="column is-offset-5">
-            <h1 class="title">Formato APA</h1>
-            <strong class="subtitle">Aqui va un subtitulo que puede ser de ayuda para el usuario</strong>
-            <p> Debe ir escrito un ejemplo para citar en formato apa y el usuario pueda elegir que pedo</p><br>
-            <div class="buttons">
-                <a class="button is-warning" href="formatoAPA.php">Comenzar a crear</a>
-            </div>
-        </div>
     </div>
-    </div>
-</section>
 
-<section class="section">
-<div class="box is-small">
+    <div class="hero-body">
+
     <div class="columns">
-        <div class="column is-offset-5">
-        <h1 class="title">Formato Chicago</h1>
-        <strong class="subtitle">Aqui va un subtitulo que puede ser de ayuda para el usuario</strong>
-        <p> Debe ir escrito un ejemplo para citar en formato apa y el usuario pueda elegir que pedo</p><br>
-        <div class="buttons">
-            <button class="button is-warning">Comenzar a crear</button>
-        </div>
-    </div>
-</div>
-</div>
-</section>
+    <div class="column is-half">
 
-<section class="section">
-    <div class="box is-small">
-        <div class="columns">
-            <div class="column is-offset-5">
-            <h1 class="title">Formato MLA</h1>
-            <strong class="subtitle">Aqui va un subtitulo que puede ser de ayuda para el usuario</strong>
-            <p> Debe ir escrito un ejemplo para citar en formato apa y el usuario pueda elegir que pedo</p><br>
-            <div class="buttons">
-                <button class="button is-warning">Comenzar a crear</button>
-            </div>
-        </div>
-    </div>
-    </div>
-    </section>
+    <div class="box">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
 
-    <section class="section">
-        <div class="box is-small">
-            <div class="columns">
-                <div class="column is-offset-5">
-                <h1 class="title">Formato Harvard</h1>
-                <strong class="subtitle">Aqui va un subtitulo que puede ser de ayuda para el usuario</strong>
-                <p> Debe ir escrito un ejemplo para citar en formato apa y el usuario pueda elegir que pedo</p><br>
-                <div class="buttons">
-                    <button class="button is-warning">Comenzar a crear</button>
+            <div class="field">
+                <label class="label">Nombre</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Nombre de tu autor" name="nombre">
                 </div>
             </div>
-        </div>
-        </div>
-        </section>
-</section>
+        
+            <div class="field">
+                <label class="label">Apellido</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Apellido de tu autor" name="apellido">
+                </div>
+            </div>
+        
+            <div class="field">
+                <label class="label">Año</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Año de publicacion" name="year">
+                </div>
+            </div>
+        
+            <div class="field">
+                <label class="label">Titulo</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Titulo del libro" name="titulo">
+                </div>
+            </div>
+        
+            <div class="field">
+                <label class="label">Editorial</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Editorial del libro" name="editorial">
+                </div>
+            </div>
+        
+            <div class="field is-grouped">
+                <div class="control">
+                    <input class="button orange" type="submit" value="Citalo!" name="enviar"></input>
+                </div>
+            <div class="control">
+                <input class="button blanco-cita is-light" type="reset" value="Cancelar"></input>
+            </div>
+            </div>
 
-<footer class="footer">
+        </form>
+
+    </div>
+
+    </div>
+
+    <div class="column">
+        <figure class="image is-128x128">
+            <img src="iconos/Citalo-logo.png">
+        </figure>
+        <p class="title is-4">Cita bibliográfica en formato APA:</p>
+    <?php
+        if (isset($_POST['enviar'])) {
+            echo crearReferenciaAPA($nombre, $apellido, $year, $titulo, $editorial);
+        } 
+    ?>
+    </div>
+    </div>
+
+    </div>
+    <div class="hero-foot">
+
+    </div>
+    
+
+    <footer class="footer">
     <div class="content has-text-centered">
       <p>
         <strong>Cítalo</strong> creado por <a href="https://jgthms.com">Paola Castillo</a> y <a href="https://jgthms.com">Carlos Jímenez</a>. <br>El código fuente cuenta con licencia
@@ -140,5 +174,6 @@
       </p>
     </div>
   </footer>
+
 </body>
 </html>
